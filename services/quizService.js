@@ -1,0 +1,26 @@
+const QuizModel = require('../models/QuizModel')
+const QuizDto = require('../dtos/QuizDto')
+class QuizService{
+
+    async getAllActiveQuiz(){
+        try {
+            const quizzes = await QuizModel.find({isActive: true})
+            if (quizzes){
+                const quizzesDto = []
+                quizzes.forEach(quiz=>{
+                    quizzesDto.push({...new QuizDto(quiz)})
+                })
+                return quizzesDto
+            }
+
+            return null
+        }
+        catch (e) {
+            console.log(e)
+            return null
+        }
+    }
+
+}
+
+module.exports = new QuizService()
