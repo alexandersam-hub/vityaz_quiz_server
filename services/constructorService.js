@@ -35,6 +35,59 @@ class ConstructorService{
             return {warning:true, message:`Вопрос ${questionDto.title} не был добавлен. Исключение БД`}
         }
     }
+
+    async updateQuestion(questionDto){
+        try{
+            // console.log('questionDto', questionDto)
+            await QuestionModel.findByIdAndUpdate(questionDto.id)
+            return {warning:false, message:`Вопрос изменен`}
+
+        }
+        catch (e) {
+            console.log(e)
+            return {warning:true, message:`Вопрос не был изменен. Исключение БД`}
+        }
+    }
+
+    async updateQuiz(quizDto){
+        try{
+
+            await QuizModel.findByIdAndUpdate(quizDto.id)
+                return {warning:false, message:`Викторина изменена`}
+        }
+        catch (e) {
+            console.log(e)
+            return {warning:true, message:`Викторина не была изменена. Исключение БД`}
+        }
+    }
+
+    async removeQuestion(questionId){
+        try {
+            //console.log(questionId)
+            await QuestionModel.findByIdAndDelete(questionId)
+
+
+
+                return  {warning:false}
+
+
+        }
+        catch (e) {
+            return {warning:true, message:`Вопрос не был удален. Исключение БД`}
+        }
+
+    }
+
+    async removeQuiz(quizId){
+        try {
+            await QuizModel.findByIdAndDelete(quizId)
+                return {warning:false}
+
+        }
+        catch (e) {
+            return {warning:true, message:`Викторина не была удалена. Исключение БД`}
+        }
+    }
 }
 
 module.exports = new ConstructorService()

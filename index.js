@@ -4,8 +4,13 @@ const constructorRouter = require('./routers/constructorRouter')
 const quizRouter = require('./routers/quizRouter')
 const questionRouter = require('./routers/questionRouter')
 const mongoose = require('mongoose')
+// const fs = require('fs');
+const https = require('https');
 const cors = require('cors')
-
+// const options = {
+//     cert: fs.readFileSync('./sslcert/fullchain.pem'),
+//     key: fs.readFileSync('./sslcert/privkey.pem')
+// };
 require('dotenv').config()
 
 
@@ -16,12 +21,12 @@ app.use(express.json())
 app.use(express.static(__dirname+'/public'));
 app.use(
     cors({
-        credentials: true,
-        origin: [process.env.URL_CLIENT],
-        optionsSuccessStatus: 200
+        // credentials: true,
+        // origin: [process.env.URL_CLIENT],
+        // optionsSuccessStatus: 200
     })
 );
-
+// app.use(require('helmet')());
 app.use('/api/auth',authRouter)
 app.use('/api/constructor',constructorRouter)
 app.use('/api/quiz',quizRouter)
@@ -33,6 +38,7 @@ const start = async ()=>{
         app.listen(8000,()=>{
             console.log(`start on port ${PORT}`)
         })
+        // https.createServer(options, app).listen(8443);
     }
     catch (e) {
         console.log(e)

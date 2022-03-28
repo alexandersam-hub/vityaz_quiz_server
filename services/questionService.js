@@ -13,6 +13,16 @@ class QuestionService{
         return questionsDto
     }
 
+    async getAllQuestionByQuizId(quizId){
+        const questions = await QuestionModel.find({quiz:quizId})
+        if(!questions)
+            return null
+        const questionsDto = []
+        questions.forEach(question=>{
+            questionsDto.push({...new QuestionDto(question)})
+        })
+        return questionsDto
+    }
 }
 
 module.exports = new QuestionService()

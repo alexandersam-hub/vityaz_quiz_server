@@ -35,6 +35,17 @@ class TokenService{
         }
     }
 
+    validationQrToken(token){
+        try{
+            // console.log('token',token)
+            const userData=jwt.verify(token,process.env.SECRET_KEY_QR_TOKEN)
+            return userData
+        }
+        catch (e) {
+            return null
+        }
+    }
+
 }
 
 module.exports = new TokenService()

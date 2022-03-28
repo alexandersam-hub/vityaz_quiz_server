@@ -20,6 +20,24 @@ class QuizService{
             return null
         }
     }
+    async getAllQuiz(){
+        try {
+            const quizzes = await QuizModel.find()
+            if (quizzes){
+                const quizzesDto = []
+                quizzes.forEach(quiz=>{
+                    quizzesDto.push({...new QuizDto(quiz)})
+                })
+                return quizzesDto
+            }
+
+            return null
+        }
+        catch (e) {
+            console.log(e)
+            return null
+        }
+    }
 
 }
 
