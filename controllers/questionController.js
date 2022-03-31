@@ -16,6 +16,7 @@ class QuestionController {
            next(e)
        }
    }
+
     async getAllQuestionById(req, res, next) {
         try {
             const {quizId} = req.body

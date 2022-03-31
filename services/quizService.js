@@ -1,5 +1,6 @@
 const QuizModel = require('../models/QuizModel')
 const QuizDto = require('../dtos/QuizDto')
+
 class QuizService{
 
     async getAllActiveQuiz(){
@@ -35,6 +36,18 @@ class QuizService{
         }
         catch (e) {
             console.log(e)
+            return null
+        }
+    }
+
+    async getQuizById(quizId){
+        try {
+            const quiz = await QuizModel.findById(quizId)
+            if(quiz)
+                return {...new QuizDto(quiz)}
+            return null
+        }
+        catch (e) {
             return null
         }
     }

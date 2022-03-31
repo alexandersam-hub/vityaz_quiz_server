@@ -1,8 +1,13 @@
 const QuestionModel = require('../models/QuestionModel')
 const QuestionDto = require('../dtos/QuestionDto')
+const QuizService = require('./quizService')
+
 class QuestionService{
 
     async getQuestionByQuizId(quizId){
+        const quiz = await QuizService.getQuizById(quizId)
+        if(!quiz)
+            return null
         const questions = await QuestionModel.find({quiz:quizId, isActive:true})
         if(!questions)
             return null
@@ -10,7 +15,7 @@ class QuestionService{
         questions.forEach(question=>{
             questionsDto.push({...new QuestionDto(question)})
         })
-        return questionsDto
+        return {questions:questionsDto, quizName:quiz.title}
     }
 
     async getAllQuestionByQuizId(quizId){
