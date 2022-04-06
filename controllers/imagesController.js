@@ -23,7 +23,8 @@ class ImagesController{
     }
 
     async getImages(req,res){
-        const {fileSize} = fs.statSync('./public/images/'+req.params.id)
+        console.log('get image',req.params.id)
+        const {fileSize } = fs.statSync('./public/images/'+req.params.id)
         fs.readFile('./public/images/'+req.params.id,(err, data)=>{
             if (err) {
                 console.log(err)
@@ -36,8 +37,8 @@ class ImagesController{
             res.end(data)
         })
     }
-    async getImagesList(){
-
+    async getImagesList(req,res){
+        return res.end('hello')
     }
 }
 
