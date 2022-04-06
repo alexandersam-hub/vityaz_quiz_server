@@ -25,8 +25,12 @@ class ImagesController{
     async getImages(req,res){
         const {fileSize} = fs.statSync('./public/images/'+req.params.id)
         fs.readFile('./public/images/'+req.params.id,(err, data)=>{
-            if (err)
-                res.end('404')
+            if (err) {
+                console.log(err)
+                return res.end('404')
+
+            }
+            res.statusCode = 200;
             res.setHeader("Content-Type", "image/png");
             res.setHeader('Content-length', fileSize)
             res.end(data)
