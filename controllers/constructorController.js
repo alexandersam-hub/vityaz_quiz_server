@@ -57,11 +57,11 @@ const constructorService = require('../services/constructorService')
      async updateQuestion(req,res,next){
          try{
              const {question} = req.body
-             console.log('question', question)
+             //console.log('question', question)
              if(!question){
                  return res.json({warning:true, message:"Не заполнены поля"})
              }
-             console.log('question',question)
+             //console.log('question',question)
              const result = await constructorService.updateQuestion(question)
              return res.json(result)
          }

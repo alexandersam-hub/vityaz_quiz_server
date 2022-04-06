@@ -1,0 +1,21 @@
+const tokenService = require('../services/tokenService')
+const userService = require('../services/authServices')
+
+async function usersMiddleware(req, res, next) {
+    const {token} = req.body
+    // console.log(token)
+    if(!token){
+        return res.json({badToken:true})
+    }
+    const user = tokenService.validationToken(token)
+    const userBd = await userService.getUserById(user.id)
+    console.log(userBd)
+    if( userBd.warning || !userBd.user.isActive )
+        return res.json({badToken:true})
+
+    if(!(user.role === 'admin' || user.role === 'user') )
+        return res.json({badPage:true})
+    next()
+}
+
+module.exports = usersMiddleware

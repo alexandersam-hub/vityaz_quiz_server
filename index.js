@@ -3,8 +3,12 @@ const authRouter = require('./routers/authRouters')
 const constructorRouter = require('./routers/constructorRouter')
 const quizRouter = require('./routers/quizRouter')
 const questionRouter = require('./routers/questionRouter')
+const completedRouter = require('./routers/completedRouter')
+const imageRouter = require('./routers/imagesRouters')
 const mongoose = require('mongoose')
 const fs = require('fs');
+
+
 const https = require('https');
 const cors = require('cors')
 
@@ -19,11 +23,11 @@ require('dotenv').config()
 const PORT = process.env.PORT || 8000
 const app = express()
 
-app.use('/',(req,res)=>{
-    return res.send('Этот сервер работает только в режиме API')
-})
+// app.use('/',(req,res)=>{
+//     return res.send('Этот сервер работает только в режиме API')
+// })
 
-app.use(express.json())
+app.use(express.json({ limit: "50mb" }))
 app.use(express.static(__dirname+'/public'));
 app.use(
     cors({
@@ -37,6 +41,8 @@ app.use('/api/auth',authRouter)
 app.use('/api/constructor',constructorRouter)
 app.use('/api/quiz',quizRouter)
 app.use('/api/questions', questionRouter)
+app.use('/api/completed', completedRouter)
+app.use('/api/image/', imageRouter)
 
 const start = async ()=>{
     try {

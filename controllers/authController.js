@@ -5,6 +5,7 @@ class AuthController{
         try{
             const {username, password} = req.body
             const result = await authService.login(username, password)
+            console.log(result)
             if (result.warning) {
                 return  res.json({warning: true, message: result.messageRu})
             }
@@ -76,6 +77,63 @@ class AuthController{
 
         }
     }
+    async getUsers(req,res,next) {
+        const result = await authService.getUsers()
+        return res.json(result)
+    }
+
+
+
+    async updateUser(req,res,next){
+        try{
+            const {user} = req.body
+            if(user){
+                const result = await authService.updateUsersData(user.id, user)
+                return res.json(result)
+            }
+            else{
+                return res.json({warning:true, data:{
+                        message:`Пользователь не создан`
+                    }})
+            }
+        }
+        catch (e) {
+            next(e)
+        }
+    }
+
+    async updateUserPassword(req,res,next){
+        try{
+            const {userid, password} = req.body
+            if(userid && password){
+                const result = await authService.updateUserPassword(userid, password)
+               return res.json(result)
+            }
+            else{
+                return res.json({warning:true, message:`Пароль не изменен`})
+            }
+        }
+        catch (e) {
+            next(e)
+        }
+    }
+
+    async deleteUser(req,res,next){
+        try{
+            const {userid} = req.body
+            if(userid){
+                const result = await authService.deleteUser(userid)
+                return res.json(result)
+            }
+            else{
+                return res.json({warning:true, message:`UserId не передан`})
+            }
+        }
+        catch (e) {
+            next(e)
+        }
+    }
+
 }
 
 module.exports = new AuthController()

@@ -19,6 +19,7 @@ class QuestionService{
     }
 
     async getAllQuestionByQuizId(quizId){
+        const quiz = await QuizService.getQuizById(quizId)
         const questions = await QuestionModel.find({quiz:quizId})
         if(!questions)
             return null
@@ -26,7 +27,7 @@ class QuestionService{
         questions.forEach(question=>{
             questionsDto.push({...new QuestionDto(question)})
         })
-        return questionsDto
+        return {questions:questionsDto, quizName:quiz.title}
     }
 }
 

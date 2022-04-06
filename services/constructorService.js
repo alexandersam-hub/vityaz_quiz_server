@@ -39,8 +39,22 @@ class ConstructorService{
     async updateQuestion(questionDto){
         try{
             // console.log('questionDto', questionDto)
-            await QuestionModel.findByIdAndUpdate(questionDto.id)
-            return {warning:false, message:`Вопрос изменен`}
+            const question = await QuestionModel.findById(questionDto.id)
+            if(question){
+                question.title = questionDto.title
+                question.type = questionDto.type
+                question.text = questionDto.text
+                question.answer = questionDto.answer
+                question.img = questionDto.img
+                question.video = questionDto.video
+                question.isActive = questionDto.isActive
+                await question.save()
+                return {warning:false, message:`Вопрос изменен`}
+            }
+            else{
+                return {warning:true, message:`Вопрос не найден`}
+            }
+
 
         }
         catch (e) {
@@ -52,7 +66,13 @@ class ConstructorService{
     async updateQuiz(quizDto){
         try{
 
-            await QuizModel.findByIdAndUpdate(quizDto.id)
+                const quiz = await QuizModel.findById(quizDto.id)
+                quiz.title = quizDto.title
+                quiz.description = quizDto.description
+                quiz.category = quizDto.category
+                quiz.img = quizDto.img
+                quiz.isActive = quizDto.isActive
+                await quiz.save()
                 return {warning:false, message:`Викторина изменена`}
         }
         catch (e) {
