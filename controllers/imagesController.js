@@ -23,19 +23,22 @@ class ImagesController{
     }
 
     async getImages(req,res){
-        console.log('get image',req.params.id)
-        const {fileSize } = fs.statSync('./public/images/'+req.params.id)
-        fs.readFile('./public/images/'+req.params.id,(err, data)=>{
-            if (err) {
-                console.log(err)
-                return res.end('404')
-            }
-            res.statusCode = 200;
-            res.setHeader("Content-Type", "image/png");
-            res.setHeader('Content-length', fileSize)
-            console.log(fileSize, data)
-            res.end(data)
-        })
+        // console.log('get image',req.params.id)
+        try{
+            fs.readFile('./public/images/'+req.params.id,(err, data)=>{
+                if (err) {
+                    console.log(err)
+                    return res.end('404')
+                }
+                res.statusCode = 200;
+                res.setHeader("Content-Type", "image/png");
+                // console.log(fileSize, data)
+                res.end(data)
+            })
+        }catch (e) {
+            return res.statusCode(404).json({warning:'not image'})
+        }
+
     }
     async getImagesList(req,res){
         return res.end('hello')
