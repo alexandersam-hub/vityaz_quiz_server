@@ -28,11 +28,11 @@ class ImagesController{
             if (err) {
                 console.log(err)
                 return res.end('404')
-
             }
             res.statusCode = 200;
             res.setHeader("Content-Type", "image/png");
             res.setHeader('Content-length', fileSize)
+            console.log(fileSize, data)
             res.end(data)
         })
     }
