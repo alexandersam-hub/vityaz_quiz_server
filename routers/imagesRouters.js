@@ -6,5 +6,5 @@ const router = new Router()
 
 router.post('/upload', adminMiddleware, imageController.uploadImages)
 router.get('/get/:id', imageController.getImages)
-
+router.get('/get_list',imageController.getImagesList )
 module.exports = router
