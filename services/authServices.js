@@ -5,10 +5,12 @@ const bcrypt = require('bcrypt')
 
 
 class AuthServices {
+
     async loginByToken(token){
         const dataUser = tokenService.validationQrToken(token)
+        //console.log('dataUser', dataUser)
         if(dataUser)
-            return await this.login(dataUser.login, dataUser.password)
+            return await this.login(dataUser.username, dataUser.password)
         return {warning:true, massage:'Некорректный токен'}
     }
 

@@ -9,7 +9,7 @@ async function usersMiddleware(req, res, next) {
     }
     const user = tokenService.validationToken(token)
     const userBd = await userService.getUserById(user.id)
-    console.log(userBd)
+    //console.log(userBd)
     if( userBd.warning || !userBd.user.isActive )
         return res.json({badToken:true})
 

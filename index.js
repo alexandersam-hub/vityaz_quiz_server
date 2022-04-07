@@ -5,6 +5,9 @@ const quizRouter = require('./routers/quizRouter')
 const questionRouter = require('./routers/questionRouter')
 const completedRouter = require('./routers/completedRouter')
 const imageRouter = require('./routers/imagesRouters')
+
+const tokenService  =require('./services/tokenService')
+
 const mongoose = require('mongoose')
 const fs = require('fs');
 

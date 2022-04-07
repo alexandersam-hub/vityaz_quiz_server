@@ -4,8 +4,7 @@ const tokenModel = require('../models/TokenModel')
 class TokenService{
 
     generationToken(payload){
-        const newToken = jwt.sign(payload, process.env.SECRET_KEY_TOKEN, {expiresIn: '30d'} )
-        // console.log('payload', newToken)
+        const newToken = jwt.sign(payload, process.env.SECRET_KEY_TOKEN, {expiresIn: '900d'} )
        return  newToken
     }
 
@@ -28,20 +27,24 @@ class TokenService{
     validationToken(token){
         try{
             const userData=jwt.verify(token,process.env.SECRET_KEY_TOKEN)
+
             return userData
         }
         catch (e) {
+            console.log(e)
             return null
         }
     }
 
     validationQrToken(token){
         try{
-            // console.log('token',token)
-            const userData=jwt.verify(token,process.env.SECRET_KEY_QR_TOKEN)
+
+            const userData=jwt.verify(token,process.env.SECRET_KEY_TOKEN)
+            //console.log('token2',userData)
             return userData
         }
         catch (e) {
+            console.log(e)
             return null
         }
     }

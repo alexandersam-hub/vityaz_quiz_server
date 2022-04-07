@@ -5,7 +5,7 @@ const path = require('path');
 class ImagesController{
 
     async uploadImages(req,res){
-        // try{
+        try{
             const randomString = uuid();
             const localStoragePath =   path.join(__dirname, '../', '/public/images')
         // console.log(req.body)
@@ -15,10 +15,10 @@ class ImagesController{
             });
             stream.write(Buffer.from(req.body.img), 'utf-8');
             stream.end();
-        // }
-        // catch (e) {
-        //     return  res.json({warning:false, message:'Не дулось загрузить картинку'});
-        // }
+        }
+        catch (e) {
+            return  res.json({warning:false, message:'Не дулось загрузить картинку'});
+        }
 
     }
 
