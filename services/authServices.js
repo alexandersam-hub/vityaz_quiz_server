@@ -33,13 +33,13 @@ class AuthServices {
         return {warning: true, message: 'Error password', messageRu: "Неверный пароль"}
     }
 
-    async registration(login, password, role){
+    async registration(username, password, role,isActive, description){
         try {
-            const candidate = await UserModel.findOne({username:login})
+            const candidate = await UserModel.findOne({username})
             if(candidate)
                 return {warning:true, messageRu:'Пользователь с таким именем существует'}
             const cashPassword = bcrypt.hashSync(password,7)
-            const newUser = await UserModel.create({username:login, password:cashPassword, role})
+            const newUser = await UserModel.create({username, password:cashPassword, role, isActive, description})
             return newUser
         }
         catch (e) {
@@ -55,8 +55,9 @@ class AuthServices {
             users.forEach((item)=>{
                 const user = new UserDto(item)
                 delete(user.password)
-                userDto.push(new UserDto(item))
+                userDto.push(user)
             })
+            //console.log(userDto)
             return  {warning:false, data:userDto}
         }
         catch (e) {
@@ -72,6 +73,7 @@ class AuthServices {
                 return {warning:true, message:'Пользователь не найден'}
             user.username = userDto.username
             user.isActive = userDto.isActive
+            user.description = userDto.description
             user.role = userDto.role
             await user.save()
             return {warning:false, message:'Пароль пользователя изменен'}
@@ -88,7 +90,7 @@ class AuthServices {
             if(!user)
                 return {warning:true, message:'Пользователь не найден'}
 
-            return {warning:false, user}
+            return {warning:false, user:{...new UserDto(user)}}
         }
         catch (e) {
             console.log(e)

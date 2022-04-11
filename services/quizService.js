@@ -42,7 +42,9 @@ class QuizService{
 
     async getQuizById(quizId){
         try {
+
             const quiz = await QuizModel.findById(quizId)
+
             if(quiz)
                 return {...new QuizDto(quiz)}
             return null

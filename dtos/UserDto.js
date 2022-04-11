@@ -5,6 +5,7 @@ class UserDto{
     password
     role
     isActive
+    description
 
     constructor(model) {
         this.id = model.id?model.id.toString():''
@@ -12,6 +13,7 @@ class UserDto{
         this.password = model.password;
         this.role = model.role;
         this.isActive = model.isActive;
+        this.description = model.description?model.description:''
     }
 
 }

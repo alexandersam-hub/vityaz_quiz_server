@@ -5,7 +5,8 @@ const CompletedModel = new Schema({
     user:{type:Schema.Types.ObjectId, ref:'User'},
     count:{type:Number},
     dates:{type:[Date]},
-    description:{type:String}
+    description:{type:String},
+    ip:{type:String}
 })
 
 module.exports = model('Completed', CompletedModel)

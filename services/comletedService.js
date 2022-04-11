@@ -1,10 +1,12 @@
 const CompletedModel = require('../models/CompletedModel')
-
+const StatisticDto = require('../dtos/StatisticDto')
+const userService = require('./authServices')
+const quizService = require('./quizService')
 class CompletedService{
 
-    async addCompleted(userId, quizId, description=''){
-        // try{
-            const currentCompleted = await CompletedModel.findOne({quiz:quizId, user:userId})
+    async addCompleted(userId, quizId,ip, description=''){
+        try{
+            const currentCompleted = await CompletedModel.findOne({quiz:quizId, ip})
             const now = new Date()
             if(currentCompleted){
                 currentCompleted.count+=1
@@ -12,15 +14,60 @@ class CompletedService{
                 await currentCompleted.save()
             }
             else {
-                await CompletedModel.create({quiz:quizId, user:userId, count:1, dates:[now], description})
+                await CompletedModel.create({quiz:quizId, user:userId, ip, count:1, dates:[now], description})
             }
             return {warning:false, message:'Прохождение викторины добавлено'}
-        // }
-        // catch (e) {
-        //     return {warning:true, message:'Прохождение не добавлено. '+ e}
-        // }
+        }
+        catch (e) {
+            return {warning:true, message:'Прохождение не добавлено. '+ e}
+        }
 
     }
-}
 
-module.exports = new CompletedService()
+    async getProgress(){
+        try {
+            const progress = await CompletedModel.find()
+            if(progress.length>0){
+                const statistic = []
+                progress.forEach(item=>{statistic.push({...new StatisticDto(item)})})
+                const  progressMap = {}
+
+                for (const item of statistic) {
+                    //console.log(item)
+                    const quiz  = await quizService.getQuizById(item.quiz)
+                    //console.log(quiz)
+                    const data = {
+                        quiz:quiz?quiz.title:'удаленный квиз',
+                        count:item.count,
+                        dates:[...item.dates],
+                        description:item.description
+
+                    }
+                    if(progressMap[item.ip]){
+
+                        progressMap[item.ip].data.push({...data})
+                    }
+                    else{
+                        const user = await userService.getUserById(item.user)
+
+                        progressMap[item.ip]= {}
+                        progressMap[item.ip].username = user.user.username,
+                        progressMap[item.ip].data = [{...data}]
+                    }
+                }
+
+
+             //   console.log(JSON.stringify(progressMap))
+                return {warning:false,data:{progress: {...progressMap}} }
+            }else{
+                return null
+            }
+        }
+        catch (e) {
+            console.log(e)
+            return {warning:true, message:'Ошибка БД'}
+        }
+    }
+}
+const completedService = new CompletedService()
+module.exports = completedService

@@ -1,13 +1,15 @@
-const completedService = require('../services/comletedService')
+
 const tokenService = require('../services/tokenService')
+const completedService = require('../services/comletedService')
 
 class CompletedController{
 
     async addCompleted(req,res,next){
         try {
+            const ip = req.header('x-forwarded-for') || req.connection.remoteAddress;
             const {token, quiz} = req.body
             const user = tokenService.validationToken(token)
-            const result = await completedService.addCompleted(user.id, quiz)
+            const result = await completedService.addCompleted(user.id, quiz, ip)
             return res.json(result)
         }
         catch (e) {
@@ -16,6 +18,16 @@ class CompletedController{
 
 
     }
+    async getProgress(req,res,next){
+        try{
+            const progress =await completedService.getProgress()
+
+            return res.json(progress)
+        }catch (e) {
+            next(e)
+        }
+    }
+
 
 }
 

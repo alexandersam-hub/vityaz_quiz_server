@@ -1,5 +1,6 @@
 const authService = require('../services/authServices')
 const tokenService = require('../services/tokenService')
+
 class AuthController{
 
     async login(req,res,next){
@@ -58,9 +59,10 @@ class AuthController{
 
     async registration(req,res,next){
         try{
-            const {username, password, role} = req.body
+            const {username, password, role, description, isActive} = req.body
+            //console.log(username, password, role, description, isActive)
             if(username && password && role){
-                const result = await authService.registration(username, password, role)
+                const result = await authService.registration(username, password, role, isActive, description)
                 if(result.warning){
                     return res.json({warning:true, data:{
                             message:`Пользователь ${username} не создан. ${result.messageRu}`
@@ -82,14 +84,20 @@ class AuthController{
         }
     }
     async getUsers(req,res,next) {
-        const result = await authService.getUsers()
-        return res.json(result)
+        try{
+            const result = await authService.getUsers()
+            return res.json(result)
+        }
+        catch (e) {
+            return res.json({warning:true, message:'Ошибка получения пользователей'})
+        }
     }
 
 
 
     async updateUser(req,res,next){
         try{
+
             const {user} = req.body
             if(user){
                 const result = await authService.updateUsersData(user.id, user)
@@ -97,7 +105,7 @@ class AuthController{
             }
             else{
                 return res.json({warning:true, data:{
-                        message:`Пользователь не создан`
+                        message:`Пользователь не изменен`
                     }})
             }
         }
@@ -155,6 +163,7 @@ class AuthController{
             next(e)
         }
     }
+
 
 }
 

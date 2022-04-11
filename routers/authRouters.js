@@ -14,4 +14,5 @@ router.post('/update_user',adminMiddleware,authController.updateUser )
 router.post('/update_user_password',adminMiddleware, authController.updateUserPassword)
 router.post('/delete_user', adminMiddleware, authController.deleteUser)
 router.post('/generate_token',adminMiddleware, authController.generateToken)
+
 module.exports = router
