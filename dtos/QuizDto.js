@@ -6,6 +6,7 @@ class Quiz{
     img
     isActive
 
+
     constructor(model) {
         this.id = model.id? model.id.toString():''
         this.title = model.title;
@@ -13,6 +14,7 @@ class Quiz{
         this.category = model.category
         this.img = model.img
         this.isActive = model.isActive
+
     }
 }
 
