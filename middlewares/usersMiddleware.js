@@ -9,6 +9,12 @@ async function usersMiddleware(req, res, next) {
     }
     const user = tokenService.validationToken(token)
     const userBd = await userService.getUserById(user.id)
+    // console.log(userBd)
+    if(!userBd.user.description){
+
+        req.body.marker = "not_description"
+       // console.log(req.body)
+    }
     //console.log(userBd)
     if( userBd.warning || !userBd.user.isActive )
         return res.json({badToken:true})

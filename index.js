@@ -5,7 +5,7 @@ const quizRouter = require('./routers/quizRouter')
 const questionRouter = require('./routers/questionRouter')
 const completedRouter = require('./routers/completedRouter')
 const imageRouter = require('./routers/imagesRouters')
-
+const supportRouter = require('./routers/supportRouter')
 const tokenService  =require('./services/tokenService')
 
 const mongoose = require('mongoose')
@@ -46,6 +46,7 @@ app.use('/api/quiz',quizRouter)
 app.use('/api/questions', questionRouter)
 app.use('/api/completed', completedRouter)
 app.use('/api/image/', imageRouter)
+app.use('/api/support/', supportRouter)
 
 const start = async ()=>{
     try {

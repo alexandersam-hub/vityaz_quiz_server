@@ -35,24 +35,23 @@ class CompletedService{
                 for (const item of statistic) {
                     //console.log(item)
                     const quiz  = await quizService.getQuizById(item.quiz)
+                    const user = await userService.getUserById(item.user)
+                    const username = user.user.username?user.user.username:'Удаленный пользователь'
+                    const description = user.user.description?user.user.description:'Нет данных'
                     //console.log(quiz)
                     const data = {
                         quiz:quiz?quiz.title:'удаленный квиз',
                         count:item.count,
                         dates:[...item.dates],
-                        description:item.description
 
                     }
-                    if(progressMap[item.ip]){
 
-                        progressMap[item.ip].data.push({...data})
+                    if(progressMap[username]){
+                        progressMap[username].data.push({...data})
                     }
                     else{
-                        const user = await userService.getUserById(item.user)
-
-                        progressMap[item.ip]= {}
-                        progressMap[item.ip].username = user.user.username,
-                        progressMap[item.ip].data = [{...data}]
+                        progressMap[username] = { description}
+                        progressMap[username].data = [{...data}]
                     }
                 }
 

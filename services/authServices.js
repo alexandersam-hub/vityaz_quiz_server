@@ -127,6 +127,17 @@ class AuthServices {
         }
     }
 
+    async addDescription(userId, descriptionText){
+        try{
+            const res = await UserModel.findByIdAndUpdate(userId, {description:descriptionText})
+            if(res)
+                return {warning:false, messageRu:'Описание добавлено'}
+        }
+        catch (e) {
+            return {warning:true, messageRu:'Ошибка базы данных при удалении'}
+        }
+    }
+
 }
 
 module.exports = new AuthServices()

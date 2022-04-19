@@ -7,7 +7,6 @@ class AuthController{
         try{
             const {username, password} = req.body
             const result = await authService.login(username, password)
-            console.log(result)
             if (result.warning) {
                 return  res.json({warning: true, message: result.messageRu})
             }
@@ -18,6 +17,25 @@ class AuthController{
             next(e)
         }
     }
+
+    async addDescription(req,res){
+        try{
+
+            const {descriptionText, token} = req.body
+            console.log(descriptionText,token )
+            if (!descriptionText || !token ) {
+                return  res.json({warning: true, message: 'Не все поля заполнены верно'})
+            }
+            const tokenData = tokenService.validationToken(token)
+            const result = await authService.addDescription(tokenData.id, descriptionText)
+
+            return res.json(result)
+        }
+        catch (e) {
+            return res.json({warning:true, message:"Ошибка при добавлении описания"})
+        }
+    }
+
     async loginByToken(req,res,next){
         const {token_qr} = req.body
 
