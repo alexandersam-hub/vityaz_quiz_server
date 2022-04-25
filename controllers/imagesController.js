@@ -22,6 +22,28 @@ class ImagesController{
 
     }
 
+    async uploadSvg(req,res){
+        try{
+            const randomString = uuid();
+            const localStoragePath =   path.join(__dirname, '../', '/public/images')
+            // console.log(req.body)
+            const stream = fs.createWriteStream(`${localStoragePath}/${randomString}.svg`);
+
+            stream.on('finish', function () {
+
+                return res.json({warning:false, data:{img:`${process.env.URL_SERVER}/api/image/get/${randomString}.svg`}});
+
+
+            });
+            stream.write(Buffer.from(req.body.img), 'utf-8');
+            stream.end();
+        }
+        catch (e) {
+            return  res.json({warning:false, message:'Не удалось загрузить svg'});
+        }
+
+    }
+
     async getImages(req,res){
         // console.log('get image',req.params.id)
         try{
@@ -31,7 +53,11 @@ class ImagesController{
                     return res.end('404')
                 }
                 res.statusCode = 200;
-                res.setHeader("Content-Type", "image/png");
+                const lastString = req.params.id.substr(req.params.id.length - 3); // => "Tabs1"
+                if (lastString === 'png')
+                    res.setHeader("Content-Type", "image/png");
+                else if(lastString === 'svg')
+                    res.setHeader("Content-Type", "image/svg+xml");
                 // console.log(fileSize, data)
                 res.end(data)
             })
@@ -40,6 +66,8 @@ class ImagesController{
         }
 
     }
+
+
     async getImagesList(req,res){
         return res.end('hello')
     }
