@@ -22,7 +22,7 @@ class AuthController{
         try{
 
             const {descriptionText, token} = req.body
-            console.log(descriptionText,token )
+            // console.log(descriptionText,token )
             if (!descriptionText || !token ) {
                 return  res.json({warning: true, message: 'Не все поля заполнены верно'})
             }

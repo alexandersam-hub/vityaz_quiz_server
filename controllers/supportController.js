@@ -9,7 +9,12 @@ class SupportController {
     async newPost(req,res,next){
         try{
             const {username, mail, text, token} = req.body
-            const tokenData = tokenService.validationToken(token)
+            let tokenData
+            if(token)
+                tokenData = tokenService.validationToken(token)
+            else{
+                tokenData = 'noname'
+            }
             if(!username || !mail || !text)
                 return res.json({warning:true, message:'Заполнены не все поля'})
             const post = await supportService.createNewPost(tokenData.id, username, mail, text)
@@ -37,7 +42,7 @@ class SupportController {
     async getPosts(req,res){
         try{
             const posts = await supportService.getPosts()
-
+            console.log(posts,'posts')
             return res.json(posts)
         }
         catch (e) {

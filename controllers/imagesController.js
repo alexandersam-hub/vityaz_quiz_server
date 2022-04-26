@@ -49,7 +49,7 @@ class ImagesController{
         try{
             fs.readFile('./public/images/'+req.params.id,(err, data)=>{
                 if (err) {
-                    console.log(err)
+                    // console.log(err)
                     return res.end('404')
                 }
                 res.statusCode = 200;

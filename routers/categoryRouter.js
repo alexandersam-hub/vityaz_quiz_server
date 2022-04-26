@@ -5,8 +5,8 @@ const adminMiddleware = require('../middlewares/adminMiddleware')
 const router = new Router()
 
 router.post('/get', categoryController.getCategory)
-router.post('/add', categoryController.addCategory)
-router.post('/update', categoryController.updateCategory)
-router.post('/del', categoryController.delCategory )
+router.post('/add',adminMiddleware, categoryController.addCategory)
+router.post('/update',adminMiddleware, categoryController.updateCategory)
+router.post('/del',adminMiddleware, categoryController.delCategory )
 
 module.exports = router
