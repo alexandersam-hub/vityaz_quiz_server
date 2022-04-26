@@ -8,7 +8,6 @@ class CompletedController{
         try {
             const ip = req.header('x-forwarded-for') || req.connection.remoteAddress;
             const {token, quiz, description} = req.body
-            console.log(description)
             const user = tokenService.validationToken(token)
             let result
             if (description)
