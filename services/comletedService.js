@@ -8,7 +8,7 @@ class CompletedService{
         try{
             const currentCompleted = await CompletedModel.findOne({quiz:quizId, user:userId})
             const now = new Date()
-
+            console.log('description', description)
             if(currentCompleted){
                 currentCompleted.count+=1
                 currentCompleted.dates.push(now)
@@ -24,14 +24,15 @@ class CompletedService{
             else {
                 const des = []
                 des.push(description)
-
+                console.log('des', des)
                 const d = await CompletedModel.create({quiz:quizId, user:userId, ip, count:1, dates:[now],description:des})
-
+                console.log('d', d)
 
             }
             return {warning:false, message:'Прохождение викторины добавлено'}
         }
         catch (e) {
+            console.log(e)
             return {warning:true, message:'Прохождение не добавлено. '+ e}
         }
 
