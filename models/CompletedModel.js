@@ -5,7 +5,7 @@ const CompletedModel = new Schema({
     user:{type:Schema.Types.ObjectId, ref:'User'},
     count:{type:Number},
     dates:{type:[Date]},
-    description:{type:[Object]},
+    description:{type:[Array]},
     ip:{type:String}
 })
 
