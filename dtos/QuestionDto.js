@@ -5,6 +5,7 @@ class QuestionDto{
     text
     quiz
     img
+    price
     type
     answer
     video
@@ -17,6 +18,7 @@ class QuestionDto{
         this.quiz = model.quiz? model.quiz.toString():''
         this.img = model.img;
         this.type = model.type;
+        this.price = model.price?model.price:0;
         this.answer = model.answer;
         this.video = model.video;
         this.isActive = model.isActive

@@ -38,24 +38,12 @@ class ConstructorService{
 
     async updateQuestion(questionDto){
         try{
-            // console.log('questionDto', questionDto)
-            const question = await QuestionModel.findById(questionDto.id)
-            if(question){
-                question.title = questionDto.title
-                question.type = questionDto.type
-                question.text = questionDto.text
-                question.answer = questionDto.answer
-                question.img = questionDto.img
-                question.video = questionDto.video
-                question.isActive = questionDto.isActive
-                await question.save()
-                return {warning:false, message:`Вопрос изменен`}
-            }
-            else{
-                return {warning:true, message:`Вопрос не найден`}
-            }
 
+            const id = questionDto.id
+            delete (questionDto.id)
+            await QuestionModel.findByIdAndUpdate(id, {...questionDto})
 
+            return {warning:false, message:`Вопрос изменен`}
         }
         catch (e) {
             console.log(e)

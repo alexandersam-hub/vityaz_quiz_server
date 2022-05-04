@@ -10,6 +10,16 @@ class CategoryService{
         }
     }
 
+    async getCategoryByName(name){
+        try{
+            const category = await CategoryModel.findOne({name})
+
+            return {warning:false, category}
+        }catch (e) {
+            return {warning:true, message:'Ошибка БД'}
+        }
+    }
+
     async addCategory(category){
         try{
             if(category.id)

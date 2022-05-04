@@ -6,6 +6,7 @@ const QuestionSchema = new Schema({
     type:{type:String, required:true},
     text:{type:String, required:true},
     answer:{type:String, required:true},
+    price:{type:Number},
     img:{type:String},
     video:{type:String},
     isActive:{type:Boolean, required:true},
