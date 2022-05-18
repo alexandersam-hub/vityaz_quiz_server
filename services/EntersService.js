@@ -24,14 +24,14 @@ class EntersService{
         try{
             const enterBd = await EntersModel.find()
             const enters = []
-            const now = new Date()
+
             for(let enter of enterBd){
                 const user = await UserModel.findById(enter.user.toString())
                 if(!user.warning){
                     enters.push(
                         {
                             user:user.username,
-                            dates:[now],
+                            dates:enter.dates,
                             description:enter.description,
                             organization:user.description
                         }
