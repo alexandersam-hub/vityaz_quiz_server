@@ -6,7 +6,7 @@ class UserDto{
     role
     isActive
     description
-    typeQuiz
+
 
     constructor(model) {
         this.id = model.id?model.id.toString():''

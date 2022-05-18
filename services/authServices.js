@@ -2,7 +2,7 @@ const UserModel = require('../models/UserModel')
 const tokenService = require('./tokenService')
 const UserDto = require('../dtos/UserDto')
 const bcrypt = require('bcrypt')
-
+const entersService = require('./EntersService')
 
 class AuthServices {
 
@@ -23,6 +23,7 @@ class AuthServices {
         const isPassEquals = bcrypt.compareSync(password, user.password)
         if (isPassEquals) {
             const userDto = new UserDto(user)
+            await entersService.addEnter(userDto.id)
             const newToken = tokenService.generationToken({...userDto})
             await tokenService.tokenSave(userDto.id, newToken)
             return {

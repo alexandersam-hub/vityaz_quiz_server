@@ -2,6 +2,8 @@ const CompletedModel = require('../models/CompletedModel')
 const StatisticDto = require('../dtos/StatisticDto')
 const userService = require('./authServices')
 const quizService = require('./quizService')
+const entersService = require('./EntersService')
+
 class CompletedService{
 
     async addCompleted(userId, quizId,ip, description=[]){
@@ -41,6 +43,8 @@ class CompletedService{
     async getProgress(){
         try {
             const progress = await CompletedModel.find()
+            const enters = await entersService.getEnters()
+
             if(progress.length>0){
                 const statistic = []
                 progress.forEach(item=>{statistic.push({...new StatisticDto(item)})})
@@ -73,10 +77,10 @@ class CompletedService{
 
              //   console.log(JSON.stringify(progressMap))
              //    console.log('progressMap', progressMap)
-                return {warning:false,data:{progress: {...progressMap}} }
+                return {warning:false,data:{progress: {...progressMap}, enters} }
             }else{
 
-                return {warning:false, data:{progress:[]}}
+                return {warning:false, data:{progress:[],enters}}
             }
         }
         catch (e) {
