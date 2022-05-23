@@ -35,6 +35,7 @@ module.exports = ({ username, password, qrCode }) => {
           opacity: 1;
           text-align: center;
           font-style:normal;
+           line-height: 1;
           /*font-family: 'Montserrat', sans-serif;*/
             font-family: 'Ubuntu', sans-serif;
        }
