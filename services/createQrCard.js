@@ -20,9 +20,8 @@ class createQrCard{
 
 
         }).toFile('./cards/'+ username +'.pdf', (err) => {
-            console.log('!!!')
+
             if(err) {
-                console.log(err)
                return false
             }
             return true

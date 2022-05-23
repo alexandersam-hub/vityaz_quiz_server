@@ -47,11 +47,11 @@ module.exports = ({ username, password, qrCode }) => {
         .auto_registration{
             text-align: center;
             padding:3px;
-              font-family: Montserrat,sans-serif;
+              font-family: 'Montserrat',sans-serif;
              font-weight: 200;
         }
         .acces{
-            font-family: Montserrat,sans-serif;
+            font-family: 'Montserrat',sans-serif;
             margin-top: 40px;
              font-weight: 200;
         }
@@ -59,7 +59,7 @@ module.exports = ({ username, password, qrCode }) => {
         .password_value,
         .login_value{
             font-weight: 600;
-             font-family: Montserrat,sans-serif;
+             font-family: 'Montserrat',sans-serif;
            
         }
         .auto_registration{
