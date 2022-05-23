@@ -4,8 +4,9 @@ module.exports = ({ username, password, qrCode }) => {
     return `
     <!DOCTYPE html><html>
     <head>
-<!--        <link rel="preconnect" href="https://fonts.gstatic.com">-->
-        <link href="https://quiz.vityazgroup.ru/fonts/gilroy/stylesheet.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
     
     </head>
     <body>
@@ -30,7 +31,7 @@ module.exports = ({ username, password, qrCode }) => {
         <style>
        .body{
           color: rgba(43,42,41,1);     
-          font-size: 4px;
+          font-size: 9px;
           opacity: 1;
           text-align: center;
           font-style:normal;
@@ -47,11 +48,11 @@ module.exports = ({ username, password, qrCode }) => {
         .auto_registration{
             text-align: center;
             padding:3px;
-              font-family: 'Gilroy',sans-serif;
+              font-family: Montserrat,sans-serif;
              font-weight: 200;
         }
         .acces{
-            font-family: 'Gilroy',sans-serif;
+            font-family: Montserrat,sans-serif;
             margin-top: 40px;
              font-weight: 200;
         }
@@ -59,11 +60,11 @@ module.exports = ({ username, password, qrCode }) => {
         .password_value,
         .login_value{
             font-weight: 600;
-             font-family: 'Gilroy',sans-serif;
+             font-family: Montserrat,sans-serif;
            
         }
         .auto_registration{
-            width: 100px;
+            width: 200px;
             margin: 40px auto 0 auto;
            
         }
