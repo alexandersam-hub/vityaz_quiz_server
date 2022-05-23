@@ -5,7 +5,7 @@ module.exports = ({ username, password, qrCode }) => {
     <!DOCTYPE html><html>
     <head>
 <!--        <link rel="preconnect" href="https://fonts.gstatic.com">-->
-        <link href="https://quiz.vityazgroup.ru/fonts/montserrat/stylesheet.css" rel="stylesheet">
+        <link href="https://quiz.vityazgroup.ru/fonts/gilroy/stylesheet.css" rel="stylesheet">
     
     </head>
     <body>
