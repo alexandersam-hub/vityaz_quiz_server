@@ -21,7 +21,7 @@ class CreatedCardController{
                     const n = i>9?i:'0'+i
                     const name = prefix+'_'+ n
                     const password = getRandomInt(100001, 999999).toString()
-                    const user = userService.registration(name, password, 'user', true, '')
+                    const user = await userService.registration(name, password, 'user', true, '')
                     const token = (process.env.URL_CLIENT_QUIZ+'/qr/'+ await tokenService.generationToken({username:name, password})).replace('https://викторина.родныеигры.рф/qr/','https://xn--80adsajtfqq.xn--c1abdmxeng9ge.xn--p1ai/qr/')
                     console.log(user, password)
                     if (!user.warning && await createQrCard.createQrCard(name, password, token))
