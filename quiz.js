@@ -7,7 +7,7 @@ const completedRouter = require('./routers/completedRouter')
 const imageRouter = require('./routers/imagesRouters')
 const supportRouter = require('./routers/supportRouter')
 const categoryRouter = require('./routers/categoryRouter')
-const tokenService  =require('./services/tokenService')
+// const createQrCard = require('./services/createQrCard')
 
 const mongoose = require('mongoose')
 const fs = require('fs');
@@ -49,6 +49,8 @@ app.use('/api/completed', completedRouter)
 app.use('/api/image/', imageRouter)
 app.use('/api/support/', supportRouter)
 app.use('/api/category/', categoryRouter)
+
+// createQrCard.createQrCard('user','123')
 
 const start = async ()=>{
     try {

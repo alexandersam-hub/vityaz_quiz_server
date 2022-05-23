@@ -154,7 +154,7 @@ class AuthController{
             if(username && password){
                 const result = await tokenService.generationToken({username, password})
                 //console.log('token', result)
-                const url = process.env.URL_CLIENT+'/qr/'+result
+                const url = process.env.URL_CLIENT_QUIZ+'/qr/'+result
                 return res.json({warning:false, data:{token:url}})
             }
             else{
