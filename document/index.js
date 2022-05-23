@@ -31,15 +31,18 @@ module.exports = ({ username, password, qrCode }) => {
         <style>
        .body{
           color: rgba(43,42,41,1);     
-          font-size: 9px;
+          font-size: 9pt;
           opacity: 1;
           text-align: center;
           font-style:normal;
        }
         .svg_qr{
            display: block;
-           margin: -30px auto;
-           width: 200px;
+           margin: -30pt auto;
+           width: 100pt;
+        }
+        .svg_qr svg{
+        width: 100%;
         }
         .wrapper_password,
         .wrapper_login,
@@ -47,13 +50,13 @@ module.exports = ({ username, password, qrCode }) => {
         .acces, 
         .auto_registration{
             text-align: center;
-            padding:3px;
+            padding:3pt;
               font-family: Montserrat,sans-serif;
              font-weight: 200;
         }
         .acces{
             font-family: Montserrat,sans-serif;
-            margin-top: 40px;
+            margin-top: 40pt;
              font-weight: 200;
         }
         .site,
@@ -64,8 +67,8 @@ module.exports = ({ username, password, qrCode }) => {
            
         }
         .auto_registration{
-            width: 200px;
-            margin: 40px auto 0 auto;
+            width: 200pt;
+            margin: 40pt auto 0 auto;
            
         }
     
