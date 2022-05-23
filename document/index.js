@@ -36,7 +36,7 @@ module.exports = ({ username, password, qrCode }) => {
           text-align: center;
           font-style:normal;
           /*font-family: 'Montserrat', sans-serif;*/
-            font-family: 'Ubuntu', sans-serif;
+            font-family: 'Arial', sans-serif;
        }
         .svg_qr{
            display: block;
