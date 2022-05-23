@@ -11,7 +11,7 @@ module.exports = ({ username, password, qrCode }) => {
     <body>
     <div class="wrapper">
         <div class="acces">Доступ к сайту викторины</div>
-        <div class="site">викторина71.родныеигры.рф</div>
+        <div class="site">викторина.родныеигры.рф</div>
         <div class="wrapper_login">
             <span class="login">Логин: </span>
             <span class="login_value">${username}</span>
