@@ -30,7 +30,7 @@ module.exports = ({ username, password, qrCode }) => {
         <style>
        .body{
           color: rgba(43,42,41,1);     
-          font-size: 9px;
+          font-size: 4px;
           opacity: 1;
           text-align: center;
           font-style:normal;
@@ -47,11 +47,11 @@ module.exports = ({ username, password, qrCode }) => {
         .auto_registration{
             text-align: center;
             padding:3px;
-              font-family: 'Montserrat',sans-serif;
+              font-family: 'Gilroy',sans-serif;
              font-weight: 200;
         }
         .acces{
-            font-family: 'Montserrat',sans-serif;
+            font-family: 'Gilroy',sans-serif;
             margin-top: 40px;
              font-weight: 200;
         }
@@ -59,11 +59,11 @@ module.exports = ({ username, password, qrCode }) => {
         .password_value,
         .login_value{
             font-weight: 600;
-             font-family: 'Montserrat',sans-serif;
+             font-family: 'Gilroy',sans-serif;
            
         }
         .auto_registration{
-            width: 200px;
+            width: 100px;
             margin: 40px auto 0 auto;
            
         }
