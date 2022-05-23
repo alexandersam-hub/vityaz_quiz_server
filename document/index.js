@@ -4,9 +4,8 @@ module.exports = ({ username, password, qrCode }) => {
     return `
     <!DOCTYPE html><html>
     <head>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+      <link href="https://quiz.vityazgroup.ru/fonts/montserrat/stylesheet.css" rel="stylesheet" type="text/css"/>
+
     
     </head>
     <body>
@@ -31,18 +30,18 @@ module.exports = ({ username, password, qrCode }) => {
         <style>
        .body{
           color: rgba(43,42,41,1);     
-          font-size: 8pt;
+          font-size: 9px;
           opacity: 1;
           text-align: center;
           font-style:normal;
            line-height: 1;
-          /*font-family: 'Montserrat', sans-serif;*/
-            font-family: 'Ubuntu', sans-serif;
+          font-family: Montserrat;
+          /*  font-family: 'Ubuntu', sans-serif;*/
        }
         .svg_qr{
            display: block;
-           margin: -30pt auto;
-           width: 100pt;
+           margin: -30px auto;
+           width: 200px;
         }
         .svg_qr svg{
         width: 100%;
@@ -53,13 +52,13 @@ module.exports = ({ username, password, qrCode }) => {
         .acces, 
         .auto_registration{
             text-align: center;
-            padding:3pt;
+            padding:3px;
                 
              font-weight: 200;
         }
         .acces{
             
-            margin-top: 40pt;
+            margin-top: 40px;
              font-weight: 200;
         }
         .site,
@@ -71,8 +70,8 @@ module.exports = ({ username, password, qrCode }) => {
         }
         .auto_registration{
         
-            margin: 40pt auto 0 auto;
-           
+            margin: 40px auto 0 auto;
+           width: 200px;
         }
     
         </style>
