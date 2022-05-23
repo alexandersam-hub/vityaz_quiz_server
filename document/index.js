@@ -31,7 +31,7 @@ module.exports = ({ username, password, qrCode }) => {
         <style>
        .body{
           color: rgba(43,42,41,1);     
-          font-size: 0.2em;
+          font-size: 1pt;
           opacity: 1;
           text-align: center;
           font-style:normal;
