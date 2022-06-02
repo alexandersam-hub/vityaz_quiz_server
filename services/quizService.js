@@ -1,16 +1,23 @@
 const QuizModel = require('../models/QuizModel')
 const QuizDto = require('../dtos/QuizDto')
-
+const UserQuizModel = require('../models/UserQuizModel')
+const UserQuizDto = require('../dtos/UserQuizDto')
 class QuizService{
 
-    async getAllActiveQuiz(){
+    async getAllActiveQuiz(userId){
         try {
             const quizzes = await QuizModel.find({isActive: true})
+            const userQuizzes = await UserQuizModel.find({user:userId})
             if (quizzes){
                 const quizzesDto = []
                 quizzes.forEach(quiz=>{
                     quizzesDto.push({...new QuizDto(quiz)})
                 })
+                if (userQuizzes){
+                    userQuizzes.forEach(uq=>{
+                        quizzesDto.push({...new UserQuizDto(uq)})
+                    })
+                }
                 return quizzesDto
             }
 

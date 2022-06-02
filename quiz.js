@@ -7,7 +7,7 @@ const completedRouter = require('./routers/completedRouter')
 const imageRouter = require('./routers/imagesRouters')
 const supportRouter = require('./routers/supportRouter')
 const categoryRouter = require('./routers/categoryRouter')
-// const createQrCard = require('./services/createQrCard')
+const userQuizRouter = require('./routers/userQuizRouter')
 
 const mongoose = require('mongoose')
 const fs = require('fs');
@@ -49,8 +49,8 @@ app.use('/api/completed', completedRouter)
 app.use('/api/image/', imageRouter)
 app.use('/api/support/', supportRouter)
 app.use('/api/category/', categoryRouter)
+app.use('/api/user_quiz/', userQuizRouter)
 
-// createQrCard.createQrCard('user','123')
 
 const start = async ()=>{
     try {
@@ -59,7 +59,12 @@ const start = async ()=>{
         app.listen(PORT,()=>{
             console.log(`start on port ${PORT}`)
         })
-        // https.createServer(options, app).listen(8443);
+        // // https.createServer(options, app).listen(8443);
+        // for(let i=200; i<=700;i++){
+        //     await authServices.removeUserByUserName('ru_'+i)
+        // }
+
+
     }
     catch (e) {
         console.log(e)

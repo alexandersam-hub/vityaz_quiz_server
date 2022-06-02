@@ -18,17 +18,22 @@ class CreatedCardController{
 
             if(prefix && index_start && index_stop){
                 for (let i = index_start; i<=index_stop; i++){
-                    const n = i>9?i:'0'+i
-                    const name = prefix+'_'+ n
-                    const password = getRandomInt(100001, 999999).toString()
-                    const user = await userService.registration(name, password, 'user', true, '')
-                    const token = (process.env.URL_CLIENT_QUIZ+'/qr/'+ await tokenService.generationToken({username:name, password})).replace('https://викторина.родныеигры.рф/qr/','https://xn--80adsajtfqq.xn--c1abdmxeng9ge.xn--p1ai/qr/')
+                    setTimeout(async ()=>{
+                        const n = i>9?i:'0'+i
+                        const name = prefix+'_'+ n
+                        const password = getRandomInt(100001, 999999).toString()
+                        const user = await userService.registration(name, password, 'user', true, '')
+                        const token ='https://xn--80adsajtfqq.xn--c1abdmxeng9ge.xn--p1ai/qr/'+ await tokenService.generationToken({username:name, password})
+                        console.log(user)
+                        if (!user.warning && await createQrCard.createQrCard(name, password, token))
+                            createdCardList.push(name)
+                        else
+                            wrongCreatedCardList.push(name)
+                    },700)
 
-                    if (!user.warning && await createQrCard.createQrCard(name, password, token))
-                        createdCardList.push(name)
-                    else
-                        wrongCreatedCardList.push(name)
                 }
+                console.log(createdCardList)
+                console.log(wrongCreatedCardList)
                 return ({warning:false, listCreated:createdCardList, wrongList:wrongCreatedCardList})
             }
             return res.json({warning:true, message:'Не все данные заполнены'})

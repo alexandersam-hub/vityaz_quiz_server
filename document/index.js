@@ -4,8 +4,7 @@ module.exports = ({ username, password, qrCode }) => {
     return `
     <!DOCTYPE html><html>
     <head>
-      <link href="https://quiz.vityazgroup.ru/fonts/montserrat/stylesheet.css" rel="stylesheet" type="text/css"/>
-
+  <link href="https://quiz.vityazgroup.ru/fonts/montserrat/stylesheet.css" rel="stylesheet">
     
     </head>
     <body>
@@ -20,7 +19,7 @@ module.exports = ({ username, password, qrCode }) => {
             <span class="password">Пароль: </span>
             <span class="password_value">${password}</span></div>
         </div>
-        <div class="auto_registration">QR-код <br/> для автоматической авторизации на сайте:</div>
+        <div class="auto_registration">QR-код<br/>для автоматической<br/>авторизации на сайте:</div>
         <div class="svg_qr">
          ${qrCode}
         </div>
@@ -34,8 +33,7 @@ module.exports = ({ username, password, qrCode }) => {
           opacity: 1;
           text-align: center;
           font-style:normal;
-           line-height: 1;
-          font-family: Montserrat;
+          
           /*  font-family: 'Ubuntu', sans-serif;*/
        }
         .svg_qr{
@@ -53,11 +51,11 @@ module.exports = ({ username, password, qrCode }) => {
         .auto_registration{
             text-align: center;
             padding:3px;
-                
+                font-family: Montserrat,sans-serif;
              font-weight: 200;
         }
         .acces{
-            
+             font-family: Montserrat,sans-serif;
             margin-top: 40px;
              font-weight: 200;
         }
@@ -65,13 +63,13 @@ module.exports = ({ username, password, qrCode }) => {
         .password_value,
         .login_value{
             font-weight: 600;
-             
+              font-family: Montserrat,sans-serif;
            
         }
         .auto_registration{
         
             margin: 40px auto 0 auto;
-           width: 200px;
+           
         }
     
         </style>
