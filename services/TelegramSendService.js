@@ -1,12 +1,17 @@
-const WebSocket = require('ws');
-const client = new WebSocket('ws://127.0.0.1:8101');
+const request = require('request');
 
 class TelegramSendService{
     sendMessageToAdmin(data){
         try{
-            console.log('telegramSend', data)
-            client.send(JSON.stringify({action: 'telegramSendAdmin', data}));
-            return true
+            request.post(
+                'http://127.0.0.1:8005/api/message/send',
+                {json:{data}},
+                function (error, response, body) {
+                    if (!error && response.statusCode == 200) {
+                        console.log(body);
+                    }
+                }
+            );
         }catch (e) {
             return false
         }
