@@ -12,7 +12,7 @@ async function usersMiddleware(req, res, next) {
         return res.json({badToken:true})
     }
     const userBd = await userService.getUserById(user.id)
-
+    console.log(userBd)
     // console.log(userBd)
     if(!userBd.user.description){
 
@@ -24,7 +24,6 @@ async function usersMiddleware(req, res, next) {
 
     if(user.date){
         const tokenData =await tokenService.checkToken(token)
-        console.log(tokenData)
         if(!tokenData.isActiveToken){
             return res.json({badToken:true})
         }
