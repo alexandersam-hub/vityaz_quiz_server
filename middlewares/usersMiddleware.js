@@ -11,17 +11,16 @@ async function usersMiddleware(req, res, next) {
     if(!user){
         return res.json({badToken:true})
     }
-    console.log('user', user)
     const userBd = await userService.getUserById(user.id)
-    console.log('userBd')
+
+    if( !userBd || userBd.warning || !userBd.user.isActive )
+        return res.json({badToken:true})
+
     if(!userBd.user.description){
 
         req.body.marker = "not_description"
         // console.log(req.body)
     }
-    if( userBd.warning || !userBd.user.isActive )
-        return res.json({badToken:true})
-
     if(user.date){
         const tokenData =await tokenService.checkToken(token)
         if(!tokenData.isActiveToken){
