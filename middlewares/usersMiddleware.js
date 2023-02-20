@@ -11,9 +11,9 @@ async function usersMiddleware(req, res, next) {
     if(!user){
         return res.json({badToken:true})
     }
+    console.log('user', user)
     const userBd = await userService.getUserById(user.id)
-    console.log(userBd)
-    // console.log(userBd)
+    console.log('userBd')
     if(!userBd.user.description){
 
         req.body.marker = "not_description"
