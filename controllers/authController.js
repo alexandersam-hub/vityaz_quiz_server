@@ -1,16 +1,18 @@
 const authService = require('../services/authServices')
 const tokenService = require('../services/tokenService')
+const DeviceDetector = require("device-detector-js");
+const deviceDetector = new DeviceDetector();
 
 class AuthController{
 
     async login(req,res,next){
         try{
             const {username, password} = req.body
-            const result = await authService.login(username, password)
-            if (result.warning) {
-                return  res.json({warning: true, message: result.messageRu})
-            }
-            return res.json({warning: false, data: {token: result.token}})
+            const device = deviceDetector.parse(req.headers['user-agent']);
+            device.host = req.headers.host
+            const result = await authService.login(username, password, device)
+
+            return res.json(result)
         }
         catch (e) {
             console.log(e)
@@ -42,13 +44,10 @@ class AuthController{
         if(!token_qr){
             return res.json({warning:true, message:'нет токена'})
         }
-        const result = await authService.loginByToken(token_qr)
-        // console.log('result',result)
-        if (result.warning) {
-            return  res.json({warning: true, message:'Ошибка авторизации qr'})
-        }
-
-        return res.json({warning: false, data: {token: result.token}})
+        const device = deviceDetector.parse(req.headers['user-agent']);
+        device.host = req.headers.host
+        const result = await authService.loginByToken(token_qr,device)
+        return res.json(result)
     }
 
     async loginByQr(req,res,next){

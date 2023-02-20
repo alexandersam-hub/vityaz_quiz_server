@@ -8,17 +8,17 @@ const imageRouter = require('./routers/imagesRouters')
 const supportRouter = require('./routers/supportRouter')
 const categoryRouter = require('./routers/categoryRouter')
 const userQuizRouter = require('./routers/userQuizRouter')
+const tokenRouter = require('./routers/tokenRouter')
 
 const mongoose = require('mongoose')
 const fs = require('fs');
-
 
 const https = require('https');
 const cors = require('cors')
 
 const options = {
-    cert: fs.readFileSync('./sslcert/fullchain.pem'),
-    key: fs.readFileSync('./sslcert/privkey.pem')
+    cert: fs.readFileSync('../sslcert/fullchain.pem'),
+    key: fs.readFileSync('../sslcert/privkey.pem')
 };
 
 require('dotenv').config()
@@ -46,10 +46,11 @@ app.use('/api/constructor',constructorRouter)
 app.use('/api/quiz',quizRouter)
 app.use('/api/questions', questionRouter)
 app.use('/api/completed', completedRouter)
-app.use('/api/image/', imageRouter)
-app.use('/api/support/', supportRouter)
-app.use('/api/category/', categoryRouter)
-app.use('/api/user_quiz/', userQuizRouter)
+app.use('/api/image', imageRouter)
+app.use('/api/support', supportRouter)
+app.use('/api/category', categoryRouter)
+app.use('/api/user_quiz', userQuizRouter)
+app.use('/api/token', tokenRouter)
 
 
 const start = async ()=>{

@@ -6,32 +6,29 @@ const entersService = require('./EntersService')
 
 class AuthServices {
 
-    async loginByToken(token){
+    async loginByToken(token, userInfo){
         const dataUser = tokenService.validationQrToken(token)
-        //console.log('dataUser', dataUser)
+        console.log(dataUser)
         if(dataUser)
-            return await this.login(dataUser.username, dataUser.password)
-        return {warning:true, massage:'Некорректный токен'}
+            return await this.login(dataUser.username, dataUser.password,userInfo)
+        return {warning:true, message:'Некорректный токен'}
     }
 
-    async login(login, password) {
+    async login(login, password, userInfo) {
         const user = await UserModel.findOne({username: login})
         if(!user)
-            return {warning: true, message: 'User is not found', messageRu: "Пользователь не найден"}
+            return {warning: true, message: "Пользователь не найден"}
         if (!user.isActive)
-            return {warning: true, message: 'User is not active', messageRu: "Пользователь заблокирован"}
+            return {warning: true, message: "Пользователь заблокирован"}
         const isPassEquals = bcrypt.compareSync(password, user.password)
         if (isPassEquals) {
             const userDto = new UserDto(user)
             await entersService.addEnter(userDto.id)
-            const newToken = tokenService.generationToken({...userDto})
-            await tokenService.tokenSave(userDto.id, newToken)
-            return {
-                warning: false,
-                token: newToken
-            }
+            const newToken = tokenService.generationToken({...userDto, host:userInfo.host, date:Date.now()})
+            const result = await tokenService.tokenSave(userDto, newToken, userInfo)
+            return result
         }
-        return {warning: true, message: 'Error password', messageRu: "Неверный пароль"}
+        return {warning: true, message: "Неверный пароль"}
     }
 
     async registration(username, password, role,isActive, description){
