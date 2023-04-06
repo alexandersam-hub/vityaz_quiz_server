@@ -9,6 +9,7 @@ const supportRouter = require('./routers/supportRouter')
 const categoryRouter = require('./routers/categoryRouter')
 const userQuizRouter = require('./routers/userQuizRouter')
 const tokenRouter = require('./routers/tokenRouter')
+const quizLimitRouter = require('./routers/quizLimitRouter')
 
 const mongoose = require('mongoose')
 const fs = require('fs');
@@ -51,6 +52,7 @@ app.use('/api/support', supportRouter)
 app.use('/api/category', categoryRouter)
 app.use('/api/user_quiz', userQuizRouter)
 app.use('/api/token', tokenRouter)
+app.use('/api/quiz_limit', quizLimitRouter)
 
 
 const start = async ()=>{
