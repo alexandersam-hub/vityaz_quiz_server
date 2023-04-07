@@ -35,7 +35,7 @@ class QuizLimitService {
 
     async removeQuizLimit(id){
         try{
-            await QuizLimitModel.findOneAndRemove(id)
+            await QuizLimitModel.findByIdAndRemove(id)
             return {warning:false, data:id}
         }catch (e){
             console.log(e)
