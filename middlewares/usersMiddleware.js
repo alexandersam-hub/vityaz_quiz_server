@@ -8,7 +8,7 @@ async function usersMiddleware(req, res, next) {
         return res.json({badToken:true})
     }
     const user = tokenService.validationToken(token)
-    console.log('!!!!', user)
+
     if(!user){
         return res.json({badToken:true})
     }
@@ -24,6 +24,7 @@ async function usersMiddleware(req, res, next) {
     }
     if(user.date){
         const tokenData =await tokenService.checkToken(token)
+        console.log('!!!!', tokenData)
         if(!tokenData.isActiveToken){
             return res.json({badToken:true})
         }
