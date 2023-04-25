@@ -69,6 +69,14 @@ class TokenService{
         return {warning:false, token}
     }
 
+    async removeTokenByToken(token){
+        try{
+            await infoTokenModel.findOneAndRemove({token})
+
+        }catch (e){
+
+        }
+    }
 
     async removeToken(userId, tokenId){
 
@@ -111,6 +119,7 @@ class TokenService{
             return userData
         }
         catch (e) {
+            this.removeTokenByToken(token)
             return null
         }
     }
