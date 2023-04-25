@@ -127,8 +127,8 @@ class TokenService{
     async checkToken(token){
         try{
             const userData=jwt.verify(token,process.env.SECRET_KEY_TOKEN)
-            if(userData.role === 'admin')
-                return {isActiveToken:true, tokenData:userData}
+            // if(userData.role === 'admin')
+            return {isActiveToken:true, tokenData:userData}
             if(!userData)
                 return {isActiveToken:false, tokenData:null}
             const tokenData = await infoTokenModel.findOne({user:userData.id})
