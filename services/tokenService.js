@@ -39,9 +39,9 @@ class TokenService{
         // const tokenData = await tokenModel.findOne({user:userId})
         const tokenInfoData = await infoTokenModel.findOne({user:user.id})
         // console.log('user', user)
-        if(user.role === 'admin'){
+        // if(user.role === 'admin'){
             return {warning:false, token}
-        }
+        // }
         if(tokenInfoData){
             //если количество токенов у пользователя превышено
             if(tokenInfoData.tokens.length >= process.env.MAX_COUNT_TOKEN_BY_USER){
