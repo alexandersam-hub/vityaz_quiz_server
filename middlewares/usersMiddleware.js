@@ -22,17 +22,17 @@ async function usersMiddleware(req, res, next) {
         req.body.marker = "not_description"
         // console.log(req.body)
     }
-    if(user.date){
-        const tokenData =await tokenService.checkToken(token)
-        console.log('!!!!', tokenData)
-        if(!tokenData.isActiveToken){
-            return res.json({badToken:true})
-        }
-    }
-    else{
-        if(!(user.role === 'admin' || user.role === 'user') )
-            return res.json({badPage:true})
-    }
+    // if(user.date){
+    //     const tokenData =await tokenService.checkToken(token)
+    //     console.log('!!!!', tokenData)
+    //     if(!tokenData.isActiveToken){
+    //         return res.json({badToken:true})
+    //     }
+    // }
+    // else{
+    //     if(!(user.role === 'admin' || user.role === 'user') )
+    //         return res.json({badPage:true})
+    // }
     next()
 }
 
